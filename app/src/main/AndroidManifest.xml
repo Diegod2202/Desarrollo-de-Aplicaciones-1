@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RitmoFit">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
 
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             tools:ignore="Instantiatable">
             <intent-filter>

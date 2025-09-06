@@ -1,4 +1,4 @@
-package com.equipo2.ritmofit.login;
+package com.equipo2.ritmofit;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.equipo2.ritmofit.data.auth.SessionManager;
+import com.equipo2.ritmofit.data.repository.SessionManager;
 import com.equipo2.ritmofit.databinding.ActivityLoginBinding;
-import com.equipo2.ritmofit.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.equipo2.ritmofit.data.auth;
+package com.equipo2.ritmofit.data.repository;
 
 import android.content.Context;
 import android.content.SharedPreferences;
