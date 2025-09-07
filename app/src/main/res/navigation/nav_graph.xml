@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.equipo2.ritmofit.ui.auth.LoginFragment"
+        android:label="Login" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.equipo2.ritmofit.ui.home.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.equipo2.ritmofit.ui.profile.ProfileFragment"
+        android:label="Perfil" />
+
+    <fragment
+        android:id="@+id/reservationsFragment"
+        android:name="com.equipo2.ritmofit.ui.reservations.ReservationsFragment"
+        android:label="Reservas" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.equipo2.ritmofit.ui.history.HistoryFragment"
+        android:label="Historial" />
+
+</navigation>
