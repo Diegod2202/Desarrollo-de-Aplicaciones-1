@@ -12,4 +12,6 @@ public class ClassRepository {
     public Call<List<GymClass>> getClasses(String disciplina, String sede, String fecha){
         return api.getClasses(disciplina, sede, fecha);
     }
+
+    public Call<GymClass> getClassById(int id){ return api.getClassById(id); }
 }

@@ -29,4 +29,13 @@
         android:name="com.equipo2.ritmofit.ui.history.HistoryFragment"
         android:label="Historial" />
 
+    <fragment
+        android:id="@+id/classDetailFragment"
+        android:name="com.equipo2.ritmofit.ui.classdetail.ClassDetailFragment"
+        android:label="Detalle de Clase">
+        <argument
+            android:name="classId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

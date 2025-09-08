@@ -38,14 +38,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
 
-        Button btnLogout = v.findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(view -> {
-            // Borrar token
-            new TokenManager(requireContext().getApplicationContext()).clear();
-            // Navegar de vuelta a Login
-            Navigation.findNavController(v).navigate(R.id.loginFragment);
-        });
-
         vm = new ViewModelProvider(this).get(HomeViewModel.class);
 
         RecyclerView rv = v.findViewById(R.id.recyclerClasses);
@@ -53,8 +45,9 @@ public class HomeFragment extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new ClassesAdapter(item -> {
-            // TODO: navegar a detalle pasando item.id
-            // Navigation.findNavController(v).navigate(R.id.classDetailFragment, bundle);
+            Bundle args = new Bundle();
+            args.putInt("classId", item.id);
+            Navigation.findNavController(v).navigate(R.id.classDetailFragment, args);
         });
         rv.setAdapter(adapter);
 

@@ -29,13 +29,5 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-
-        Button btnLogout = v.findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(view -> {
-            // Borro token
-            new TokenManager(requireContext().getApplicationContext()).clear();
-            // Vuelvo a Login
-            Navigation.findNavController(v).navigate(R.id.loginFragment);
-        });
     }
 }
