@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.*;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.equipo2.ritmofit.R;
@@ -37,6 +38,7 @@ public class ReservationsFragment extends Fragment {
 
         RecyclerView rv = v.findViewById(R.id.recyclerReservations);
         ProgressBar progress = v.findViewById(R.id.progress);
+        TextView empty = v.findViewById(R.id.emptyView);
 
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new ReservationsAdapter(new ReservationsAdapter.OnAction() {
@@ -54,7 +56,13 @@ public class ReservationsFragment extends Fragment {
 
         vm.getLoading().observe(getViewLifecycleOwner(), l ->
                 progress.setVisibility(Boolean.TRUE.equals(l) ? View.VISIBLE : View.GONE));
-        vm.getReservations().observe(getViewLifecycleOwner(), adapter::submit);
+
+        vm.getReservations().observe(getViewLifecycleOwner(), list -> {
+            adapter.submit(list);
+            boolean isEmpty = (list == null || list.isEmpty());
+            empty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        });
+
         vm.getError().observe(getViewLifecycleOwner(), err -> {
             if (err != null) Toast.makeText(getContext(), err, Toast.LENGTH_LONG).show();
         });

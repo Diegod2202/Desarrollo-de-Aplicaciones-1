@@ -34,11 +34,10 @@ public class NetworkModule {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        // Interceptor que agrega Authorization si hay token
+        // Agrego Authorization si hay token
         Interceptor authInterceptor = chain -> {
-            Request original = chain.request();
-            Request.Builder builder = original.newBuilder();
-
+            var original = chain.request();
+            var builder = original.newBuilder();
             String token = tokenManager.getToken();
             if (token != null && !token.isEmpty()) {
                 builder.header("Authorization", "Bearer " + token);
@@ -46,8 +45,19 @@ public class NetworkModule {
             return chain.proceed(builder.build());
         };
 
+        // Si el servidor responde 401, limpiamos el token
+        Interceptor unauthorizedInterceptor = chain -> {
+            var response = chain.proceed(chain.request());
+            if (response.code() == 401) {
+                tokenManager.clear();
+                // devuelvo igual la respuesta, la UI verá error y al no tener token el próximo ingreso te lleva a Login
+            }
+            return response;
+        };
+
         return new OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
+                .addInterceptor(unauthorizedInterceptor)
                 .addInterceptor(logging)
                 .build();
     }

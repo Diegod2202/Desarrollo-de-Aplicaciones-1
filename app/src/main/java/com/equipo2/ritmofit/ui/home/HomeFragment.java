@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
 
         RecyclerView rv = v.findViewById(R.id.recyclerClasses);
         ProgressBar progress = v.findViewById(R.id.progress);
+        TextView empty = v.findViewById(R.id.emptyView);
 
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new ClassesAdapter(item -> {
@@ -54,7 +56,11 @@ public class HomeFragment extends Fragment {
         vm.getLoading().observe(getViewLifecycleOwner(), loading ->
                 progress.setVisibility(Boolean.TRUE.equals(loading) ? View.VISIBLE : View.GONE));
 
-        vm.getClasses().observe(getViewLifecycleOwner(), adapter::submit);
+        vm.getClasses().observe(getViewLifecycleOwner(), list -> {
+            adapter.submit(list);
+            boolean isEmpty = (list == null || list.isEmpty());
+            empty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        });
 
         vm.getError().observe(getViewLifecycleOwner(), err -> {
             if (err != null) Toast.makeText(getContext(), err, Toast.LENGTH_LONG).show();
